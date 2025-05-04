@@ -61,6 +61,16 @@
 
             </a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/orders') }}">
+                <i class="mdi mdi-receipt menu-icon"></i>
+                <span class="menu-title">Orders</span>
+
+            </a>
+        </li>
+
+       
         {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#users" aria-expanded="false" aria-controls="users">
                 <i class="mdi mdi-account-group menu-icon"></i>

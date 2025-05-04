@@ -20,7 +20,7 @@
                         <th>Catagory</th>
                         <th>Product</th>
                         <th>Price</th>
-                        <th>Quantity</th>
+                        {{-- <th>Quantity</th> --}}
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -38,7 +38,7 @@
                        </td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->selling_price }}</td>
-                        <td>{{ $product->quantity }}</td>
+                        {{-- <td>{{ $product->quantity }}</td> --}}
                         <td>{{ $product->status == '1' ? 'Hidden' : 'Visible' }}</td>
                         <td>
                             <a href="{{ url('admin/products/'.$product->id. '/edit') }}" class="btn btn-sm btn-success">Edit</a>

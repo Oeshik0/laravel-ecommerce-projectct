@@ -10,7 +10,7 @@
             @foreach ($sliders as $key => $sliderItem)
                 <div class="carousel-item {{$key== 0 ? 'active':''}} ">
                     @if ($sliderItem->image)
-                        <img src="{{ asset("$sliderItem->image") }}" class="d-block w-100" alt="...">
+                        <img src="{{ asset("$sliderItem->image") }}" class="d-block w-100" alt="..." style="height: 700px; object-fit: cover;">
                     @endif
 
                     
@@ -43,6 +43,11 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+    <br>
+    <br>
+
+
+
 
     <!-- About SkyRed -->
 <section class="py-5 bg-light">

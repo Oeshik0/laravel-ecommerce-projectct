@@ -17,7 +17,7 @@
                     <div class="category-card">
                         <a href="{{url('/collections/'.$catagoryItem->slug)}}">
                             <div class="category-card-img">
-                                <img src="{{asset('uploads/catagory/' . $catagoryItem->image)}}" class="w-100" alt="{{$catagoryItem->name}}">
+                                <img src="{{asset('uploads/catagory/' . $catagoryItem->image)}}" class="w-100" height="250px" width="40px" alt="{{$catagoryItem->name}}">
                             </div>
                             <div class="category-card-body">
                                 <h5>{{$catagoryItem->name}}</h5>

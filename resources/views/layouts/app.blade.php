@@ -29,6 +29,7 @@
 
 
     @livewireStyles
+
 </head>
 <body>
     <div id="app">
@@ -47,5 +48,6 @@
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
     @livewireScripts(['turbo' => true])
+    @stack('scripts')
 </body>
 </html>

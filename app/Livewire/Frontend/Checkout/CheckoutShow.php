@@ -12,6 +12,40 @@ class CheckoutShow extends Component
 {
     public $carts, $totalProductAmount=0;
     public $fullname, $email, $phone, $pincode, $address, $payment_mode=NULL, $payment_id=NULL;
+
+   
+
+
+   public function validationForAll()
+{
+    // Only dispatch if validation fails
+    if (!$this->validate()) {
+        $this->dispatch('validation-error', ['message' => 'Please fill in all required fields.']);
+    }
+}
+
+
+public function paidOnlineOrder($value)
+{
+    $this->validate(); //  Always validate first
+
+    $this->payment_mode = 'Paid by PayPal';
+    $this->payment_id = $value; // Set the payment ID from PayPal
+
+    if ($this->placeOrder()) {
+        Cart::where('user_id', auth()->user()->id)->delete();
+        $this->reset(['carts', 'totalProductAmount']);
+        $this->carts = Cart::where('user_id', auth()->user()->id)->get();
+
+        $this->dispatch('order-success');
+    } else {
+        $this->dispatch('order-fail');
+    }
+}
+
+
+
+
     public function rules()
     {
         return [

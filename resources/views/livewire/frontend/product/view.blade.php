@@ -2,11 +2,11 @@
     <div class="py-3 py-md-5">
 
         <div class="container">
-             @if (session()->has('message'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
+            @if (session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-md-5 mt-3">
                     <div class="bg-white border">
@@ -34,72 +34,98 @@
                         </div>
                         <div>
                             @if ($product->productColors->count() > 0)
-                                @if ($product->productColors)
+                                <div class="d-flex flex-wrap gap-2">
                                     @foreach ($product->productColors as $colorItem)
-                                        {{-- <input type="radio" name="colorSelection"
-                                            value="{{ $colorItem->id }}" />{{ $colorItem->color->name }} --}}
-                                            <label class="colorSelectionLabel text-white" style="background-color: {{ $colorItem->color->code }} "
-                                                wire:click= "colorSelected({{ $colorItem->id }})"
-                                                >
+                                        <div class="text-center">
+                                            <label
+                                                class="colorSelectionLabel d-block px-3 py-2 badge   {{ $colorItem->color->code == 'black' ? 'text-white' : 'text-dark' }}"
+                                                style="background-color: {{ $colorItem->color->code }};"
+                                                wire:click="colorSelected({{ $colorItem->id }})">
                                                 {{ $colorItem->color->name }}
                                             </label>
+                                            <div>
+                                                {{-- <small class="text-black">({{ $colorItem->quantity }} pcs)</small> --}}
+                                                <span class="badge bg-info text-dark">Available:
+                                                    {{ $colorItem->quantity }}</span>
+                                            </div>
+                                             
+                                        </div>
+                                        
                                     @endforeach
-                                @endif
-                                <div>
+                                </div>
+                                <div class="mt-1">
+                                    <span class="badge bg-success text-dark">
+                                       Total Available Color Quantity: {{ $product->productColors->sum('quantity') }}
+                                    </span>
+                                </div>
 
-                                
-                                @if ($prodColorSelectedQuantiy=='outofstock')
-                                    <label class="btn-sm py-1 mt-2 text-white bg-danger">Out Of Stock</label>
-                                @elseif($prodColorSelectedQuantiy>0)
-                                    <label class="btn-sm py-1 mt-2 text-white bg-success">In Stock</label>
-                                @endif
+
+                                <div>
+                                    @if ($prodColorSelectedQuantiy === 'outofstock')
+                                        <label class="btn-sm py-1 mt-2 text-white bg-danger">Out Of Stock</label>
+                                    @elseif($prodColorSelectedQuantiy > 0)
+                                        <label class="btn-sm py-1 mt-2 text-white bg-success">In Stock</label>
+                                    @endif
                                 </div>
                             @else
-                                @if ($product->quantity)
+                                @if ($product->quantity > 0)
                                     <label class="btn-sm py-1 mt-2 text-white bg-success">In Stock</label>
                                 @else
                                     <label class="btn-sm py-1 mt-2 text-white bg-danger">Out Of Stock</label>
                                 @endif
                             @endif
                         </div>
+
                         <div class="mt-2">
-                            <div class="input-group">
-                                <span class="btn btn1" wire:click="decrementQuantity"><i class="fa fa-minus"></i></span>
-                                <input type="text" wire:model="quantityCount" value="{{$this->quantityCount}}" readonly class="input-quantity" />
-                                <span class="btn btn1" wire:click="incrementQuantity"><i class="fa fa-plus"></i></span>
+                            <div class="mt-3">
+                                <div class="input-group" style="width: 130px; align-items: center;">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        wire:click="decrementQuantity">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                    <input type="text" wire:model="quantityCount" readonly
+                                        class="form-control text-center" style="background-color: #f8f9fa;">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        wire:click="incrementQuantity">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                               
                             </div>
-                        </div>
-                        <div class="mt-2">
-                            <button type="button" wire:click="addToCart({{$product->id}})" class="btn btn1"> 
-                                <i class="fa fa-shopping-cart"></i> Add To Cart</button>
 
-                            <button type="button" wire:click="addToWishlist({{$product->id}})" class="btn btn1">
-                                 <i class="fa fa-heart"></i> Add To Wishlist </a>
-                        </div>
-                        <div class="mt-3">
-                            <h5 class="mb-0">Small Description</h5>
-                            <p>
-                                {!! $product->small_description !!}
-                            </p>
-                        </div>
 
+                            <div class="mt-2">
+                                <button type="button" wire:click="addToCart({{ $product->id }})" class="btn btn1">
+                                    <i class="fa fa-shopping-cart"></i> Add To Cart</button>
+
+                                <button type="button" wire:click="addToWishlist({{ $product->id }})"
+                                    class="btn btn1">
+                                    <i class="fa fa-heart"></i> Add To Wishlist </a>
+                            </div>
+                            <div class="mt-3">
+                                <h5 class="mb-0">Small Description</h5>
+                                <p>
+                                    {!! $product->small_description !!}
+                                </p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 mt-3">
-                    <div class="card">
-                        <div class="card-header bg-white">
-                            <h4>Description</h4>
-                        </div>
-                        <div class="card-body">
-                            <p>
-                                {!! $product->description !!}
-                            </p>
+                <div class="row">
+                    <div class="col-md-12 mt-3">
+                        <div class="card">
+                            <div class="card-header bg-white">
+                                <h4>Description</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    {!! $product->description !!}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

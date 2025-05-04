@@ -130,11 +130,11 @@
                                         <input type="text" name="selling_price" class="form-control"
                                             placeholder="Enter selling price">
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    {{-- <div class="col-md-4 mb-3">
                                         <label class="form-label">Quantity</label>
                                         <input type="text" name="quantity" class="form-control"
                                             placeholder="Enter quantity">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">

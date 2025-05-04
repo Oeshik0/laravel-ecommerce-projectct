@@ -55,7 +55,9 @@
                                     <a
                                         href="{{ url('/collections/' . $productItem->catagory->slug . '/' . $productItem->slug) }}">
                                         <img src="{{ asset($productItem->productImages[0]->image) }}"
-                                            alt="{{ $productItem->name }}">
+                                            alt="{{ $productItem->name }}"
+                                            style="width: 300px; height: 200px; object-fit: cover; border-radius: 8px;">
+                                            
                                     </a>
                                 @endif
                             </div>
